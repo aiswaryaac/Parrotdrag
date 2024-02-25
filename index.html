@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>parrot</title>
+
+    <style>
+
+        .dragone{
+            width: 100px;
+            height: 100px;
+        }
+        .dragtwo{
+            width: 100px;
+            height: 100px;
+        }
+        .dragthree{
+            width: 100px;
+            height: 100px;
+        }
+        .dragfour{
+            width: 100px;
+            height: 100px;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        .wrapper1{
+       width: 100px;
+       height: 100px;
+      }
+      .wrapper2{
+      width: 100px;
+      height: 100px;
+      }  
+      .wrapper3{
+       width: 100px;
+       height: 100px;
+      }
+      .wrapper4{
+      width: 100px;
+      height: 100px;
+      }  
+      .imgc{
+        float: right;
+        width: 100px;
+        height: 100px;
+        opacity: 0.4;
+      }
+      .sqa{
+        float: right;
+        margin-top: 10px;
+        padding-right: 450px;
+      }
+      
+    </style>
+</head>
+<body>
+    <!----drop-->
+<div class="sqa">
+
+    <table border="1px"> 
+
+
+
+
+        <tr>
+            <td><div class="wrapper1">
+                <img src="00.jpg" id="droppable1" class="imgc" >
+                
+            </div></td>
+                <td><div class="wrapper2">
+                    <img src="10.jpg" id="droppable2" class="imgc">
+               
+                </div></td>
+        </tr>
+        <tr>
+            <td><div class="wrapper3">
+                <img src="01.jpg" id="droppable3" class="imgc" >
+                
+               
+            </div></td>
+            <td><div class="wrapper4">
+                <img src="11.jpg" id="droppable4" class="imgc">
+            </div></td>
+
+        </tr>
+    </table>
+</div>
+    <!----draggable---->
+    <div class="dragone">
+        <img src="01.jpg" draggable="true" id="draggable1">
+
+    </div>
+    <div class="dragtwo">
+        <img src="00.jpg" draggable="true" id="draggable2">
+
+    </div>
+    <div class="dragthree">
+        <img src="11.jpg" draggable="true" id="draggable3">
+
+    </div>
+    <div class="dragfour">
+        <img src="10.jpg" draggable="true" id="draggable4">
+
+    </div>
+
+    <script>
+        const draggable1 = document.getElementById('draggable1');
+        const draggable2 = document.getElementById('draggable2');
+        const draggable3 = document.getElementById('draggable3');
+        const draggable4 = document.getElementById('draggable4');
+        const droppable1 = document.getElementById('droppable1');
+        const droppable2 = document.getElementById('droppable2');
+        const droppable3 = document.getElementById('droppable3');
+        const droppable4 = document.getElementById('droppable4');
+
+        //add event
+        draggable1.addEventListener('dragstart', handleDragStart);
+        draggable1.addEventListener('dragover', handleDragOver);
+
+        draggable2.addEventListener('dragstart', handleDragStart);
+        draggable2.addEventListener('dragover', handleDragOver);
+
+        draggable3.addEventListener('dragstart', handleDragStart);
+        draggable3.addEventListener('dragover', handleDragOver);
+
+        draggable4.addEventListener('dragstart', handleDragStart);
+        draggable4.addEventListener('dragover', handleDragOver);
+
+        //droppable
+
+        droppable1.addEventListener('dragover',allowDrop);
+        droppable1.addEventListener('drop',handleDrop);
+
+        droppable2.addEventListener('dragover',allowDrop);
+        droppable2.addEventListener('drop',handleDrop);
+
+        droppable3.addEventListener('dragover',allowDrop);
+        droppable3.addEventListener('drop',handleDrop);
+
+        droppable4.addEventListener('dragover',allowDrop);
+        droppable4.addEventListener('drop',handleDrop);
+
+
+        function handleDragStart(event) {
+      draggedItem = event.target;
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/html', event.target.id);
+    }
+    function handleDragOver(event) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
+      const targetItem=event.target;
+    
+      }
+
+    function allowDrop(){
+        event.preventDefault();
+    }
+
+    function handleDrop(event) {
+      event.preventDefault();
+      var data=event.dataTransfer.getData("text/html");
+                event.target.appendChild(document.getElementById(data));
+                event.target.style.opacity='1';
+  }
+    </script>
+   
+</body>
+</html>
